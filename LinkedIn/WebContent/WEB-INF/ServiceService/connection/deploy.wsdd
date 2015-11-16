@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ServiceService WSDL service -->
+
+  <service name="Service" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://connection"/>
+      <parameter name="wsdlServiceElement" value="ServiceService"/>
+      <parameter name="schemaQualified" value="http://connection"/>
+      <parameter name="wsdlServicePort" value="Service"/>
+      <parameter name="className" value="connection.Service"/>
+      <parameter name="wsdlPortType" value="Service"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://connection" xmlns:retNS="http://connection" xmlns:rtns="http://connection" name="getProfile" qname="operNS:getProfile" returnQName="retNS:getProfileReturn" returnType="rtns:UsersBean" soapAction="">
+        <parameter xmlns:pns="http://connection" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:user" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://connection" xmlns:retNS="http://connection" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="signUp" qname="operNS:signUp" returnQName="retNS:signUpReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://connection" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userName" type="tns:string"/>
+        <parameter xmlns:pns="http://connection" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
+        <parameter xmlns:pns="http://connection" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:fName" type="tns:string"/>
+        <parameter xmlns:pns="http://connection" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:lName" type="tns:string"/>
+        <parameter xmlns:pns="http://connection" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:city" type="tns:string"/>
+        <parameter xmlns:pns="http://connection" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:mobile" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://connection" xmlns:retNS="http://connection" xmlns:rtns="http://connection" name="signIn" qname="operNS:signIn" returnQName="retNS:signInReturn" returnType="rtns:UsersBean" soapAction="">
+        <parameter xmlns:pns="http://connection" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:user" type="tns:string"/>
+        <parameter xmlns:pns="http://connection" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:pass" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://connection" name="updateProfile" qname="operNS:updateProfile" soapAction="">
+        <parameter xmlns:pns="http://connection" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:user" type="tns:string"/>
+        <parameter xmlns:pns="http://connection" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sum" type="tns:string"/>
+        <parameter xmlns:pns="http://connection" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:exp" type="tns:string"/>
+        <parameter xmlns:pns="http://connection" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:edu" type="tns:string"/>
+        <parameter xmlns:pns="http://connection" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:proj" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://connection" xmlns:retNS="http://connection" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getConnections" qname="operNS:getConnections" returnQName="retNS:getConnectionsReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://connection" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:user" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://connection" xmlns:retNS="http://connection" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getConnReq" qname="operNS:getConnReq" returnQName="retNS:getConnReqReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://connection" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:user" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="updateProfile signIn getProfile signUp getConnReq getConnections"/>
+
+      <typeMapping xmlns:ns="http://connection" qname="ns:UsersBean" type="java:connection.UsersBean" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>
